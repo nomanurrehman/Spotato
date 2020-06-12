@@ -21,7 +21,7 @@ class Playlist extends React.Component {
               <h3 className="card-title">{this.props.playlistName}</h3>
             </div>
             <div className="card-body p-0">
-              <TrackList tracks={this.props.playlistTracks} onAdd={this.props.onAdd} />
+              <TrackList tracks={this.props.playlistTracks} onSelect={this.props.onSelect} onAdd={this.props.onAdd} />
             </div>
           </div>
         </div>

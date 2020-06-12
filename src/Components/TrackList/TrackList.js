@@ -5,13 +5,13 @@ import Track from './../Track/Track';
 class TrackList extends React.Component {
   render(){
     return (
-      <table className="table table-striped">
+      <table className="table table-bordered table-striped">
         <thead>
           <tr>
             <th style={{width: '10px'}}>#</th>
             <th>Title</th>
             <th>Artist</th>
-            <th>Add to Playlist</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>

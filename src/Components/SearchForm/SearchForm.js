@@ -18,7 +18,10 @@ class SearchForm extends React.Component {
   }
 
   search(){
-    this.props.onSearch(this.state.term);
+    const term = this.state.term.trim();
+    if(term.length !== 0){
+      this.props.onSearch(term);
+    }
   }
 
   render(){

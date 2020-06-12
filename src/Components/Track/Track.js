@@ -5,16 +5,11 @@ import PropTypes from 'prop-types';
 class Track extends React.Component {
   constructor(props){
     super(props);
-    this.selectTrack = this.selectTrack.bind(this);
-    this.removeTrack = this.removeTrack.bind(this);
+    this.select = this.select.bind(this);
   }
 
-  selectTrack(){
+  select(){
     this.props.onSelect(this.props.track);
-  }
-
-  removeTrack(){
-    this.props.onRemove(this.props.track);
   }
 
   render(){
@@ -25,10 +20,7 @@ class Track extends React.Component {
         <td>{this.props.track.artist}</td>
         <td>
           <div className="btn-group">
-            {/* <button type="button" className="btn btn-success" onClick={this.selectTrack}>+</button> */}
-            <button type="button" className="btn btn-default" data-toggle="modal" data-target="#modal" onClick={this.selectTrack}>
-              Launch Default Modal
-            </button>
+            <button type="button" className="btn btn-block btn-success btn-sm" data-toggle="modal" data-target="#modal" onClick={this.select}>Add to Playlist</button>
           </div>
         </td>
       </tr>
@@ -38,14 +30,12 @@ class Track extends React.Component {
 
 Track.propTypes = {
   track: PropTypes.object,
-  onAdd: PropTypes.func,
-  onRemove: PropTypes.func
+  onSelect: PropTypes.func
 };
 
 Track.defaultProps = {
-  tracks: {},
-  onAdd: () => {},
-  onRemove: () => {}
+  track: {},
+  onSelect: () => {}
 };
 
 export default Track;

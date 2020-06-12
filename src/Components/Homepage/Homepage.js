@@ -1,6 +1,5 @@
 import React from 'react';
 import SearchResults from './../SearchResults/SearchResults';
-import Playlist from './../Playlist/Playlist';
 import TopNavigation from './../TopNavigation/TopNavigation';
 import SideNavigation from './../SideNavigation/SideNavigation';
 import Modal from './../Modal/Modal';
@@ -13,14 +12,10 @@ class Homepage extends React.Component {
     this.state = {
       term: '',
       searchResults: [],
-      playlistName: 'My playlist',
       playlistTracks: [],
       selectedTrack: {}
     };
-    this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.addTrack = this.addTrack.bind(this);
-    this.removeTrack = this.removeTrack.bind(this);
-    this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
     this.selectTrack = this.selectTrack.bind(this);
   }
@@ -35,12 +30,6 @@ class Homepage extends React.Component {
     this.setState({
       term: term,
       searchResults: searchResults
-    });
-  }
-
-  updatePlaylistName(name){
-    this.setState({
-      playlistName: name
     });
   }
 
@@ -61,20 +50,6 @@ class Homepage extends React.Component {
     }
   }
 
-  removeTrack(track){
-    this.setState({
-      playlistTracks: this.state.playlistTracks.filter(playlistTrack => playlistTrack !== track)
-    });
-  }
-
-  savePlaylist(){
-    Spotify.savePlaylist(this.state.playlistName, this.state.playlistTracks);
-    this.setState({
-      playlistName: 'New Playlist',
-      playlistTracks: []
-    });
-  }
-
   render(){
     return (
       <div className="wrapper">
@@ -88,9 +63,8 @@ class Homepage extends React.Component {
           <section className="content">
             <div className="container-fluid">
               <SearchResults term={this.state.term} searchResults={this.state.searchResults} onSelect={this.selectTrack} />
-              <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} />
             </div>
-            <Modal track={this.state.selectedTrack} onAdd={this.addTrack} />
+            <Modal track={this.state.selectedTrack} action="add" onAction={this.addTrack} />
           </section>
         </div>
 

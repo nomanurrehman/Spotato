@@ -11879,6 +11879,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 }
 
 .nav-sidebar > .nav-item .nav-icon {
+  color: #1ed760;
   margin-left: .05rem;
   font-size: 1.2rem;
   margin-right: .2rem;

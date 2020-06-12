@@ -7,13 +7,21 @@ class SearchResults extends React.Component {
   /*
    * If nothing has been searched yet,
    * notify user to search else
-   * show search results with search term.
+   * show search term.
    */
-  getTitle(term){
-    if(Boolean(term)){
-      return `Search results for "${term}"`;
+  getTitle(){
+    if(this.props.term.length !== 0){
+      return `Search results for "${this.props.term}"`;
     } else {
       return "Let's get rolling with the searchin..."
+    }
+  }
+
+  getBody(){
+    if(this.props.searchResults.length > 0){
+      return <TrackList tracks={this.props.searchResults} onSelect={this.props.onSelect} />;
+    } else {
+      return 'No tracks to display';
     }
   }
 
@@ -23,11 +31,9 @@ class SearchResults extends React.Component {
         <div className="col-md-12">
           <div className="card">
             <div className="card-header">
-              <h3 className="card-title">{ this.getTitle(this.props.term) }</h3>
+              <h3 className="card-title">{ this.getTitle() }</h3>
             </div>
-            <div className="card-body p-0">
-              <TrackList tracks={this.props.searchResults} onSelect={this.props.onSelect} />
-            </div>
+            <div className="card-body">{ this.getBody() }</div>
           </div>
         </div>
       </div>
@@ -38,13 +44,13 @@ class SearchResults extends React.Component {
 SearchResults.propTypes = {
   term: PropTypes.string,
   searchResults: PropTypes.array,
-  confirmTrack: PropTypes.func
+  onSelect: PropTypes.func
 };
 
 SearchResults.defaultProps = {
   term: '',
   searchResults: [],
-  confirmTrack: () => {}
+  onSelect: () => {}
 };
 
 export default SearchResults;
