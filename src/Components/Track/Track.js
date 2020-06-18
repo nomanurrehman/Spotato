@@ -20,7 +20,7 @@ class Track extends React.Component {
         <td>{this.props.track.artist}</td>
         <td>
           <div className="btn-group">
-            <button type="button" className="btn btn-block btn-success btn-sm" data-toggle="modal" data-target="#modal" onClick={this.select}>Add to Playlist</button>
+    <button type="button" className="btn btn-block btn-success btn-sm" data-toggle="modal" data-target="#modal" onClick={this.select}>{this.props.buttonText}</button>
           </div>
         </td>
       </tr>
@@ -29,11 +29,13 @@ class Track extends React.Component {
 }
 
 Track.propTypes = {
+  buttonText: PropTypes.string,
   track: PropTypes.object,
   onSelect: PropTypes.func
 };
 
 Track.defaultProps = {
+  buttonText: '',
   track: {},
   onSelect: () => {}
 };

@@ -9,7 +9,7 @@ class SearchResults extends React.Component {
    * notify user to search else
    * show search term.
    */
-  getTitle(){
+  displayTerm(){
     if(this.props.term.length !== 0){
       return `Search results for "${this.props.term}"`;
     } else {
@@ -17,9 +17,13 @@ class SearchResults extends React.Component {
     }
   }
 
-  getBody(){
+  /*
+   * If there are no tracks to display,
+   * notify user else show tracks.
+   */
+  displayResults(){
     if(this.props.searchResults.length > 0){
-      return <TrackList tracks={this.props.searchResults} onSelect={this.props.onSelect} />;
+      return <TrackList tracks={this.props.searchResults} onSelect={this.props.onSelect} buttonText="Add to Playlist" />;
     } else {
       return 'No tracks to display';
     }
@@ -31,9 +35,9 @@ class SearchResults extends React.Component {
         <div className="col-md-12">
           <div className="card">
             <div className="card-header">
-              <h3 className="card-title">{ this.getTitle() }</h3>
+              <h3 className="card-title">{ this.displayTerm() }</h3>
             </div>
-            <div className="card-body">{ this.getBody() }</div>
+            <div className="card-body">{ this.displayResults() }</div>
           </div>
         </div>
       </div>

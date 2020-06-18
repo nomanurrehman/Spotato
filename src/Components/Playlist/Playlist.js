@@ -6,10 +6,27 @@ class Playlist extends React.Component {
   constructor(props){
     super(props);
     this.handleNameChange = this.handleNameChange.bind(this);
+    this.savePlaylist = this.savePlaylist.bind(this);
+  }
+
+  savePlaylist(){
+    console.log('Saving playlist...');
   }
 
   handleNameChange(event){
     this.props.onNameChange(event.target.value);
+  }
+
+  /*
+   * If there are no tracks to display,
+   * notify user else display tracks.
+   */
+  displayTracks(){
+    if( this.props.playlistTracks.length !== 0 ){
+      return <TrackList tracks={this.props.playlistTracks} onSelect={this.props.onSelect} buttonText="Remove from Playlist" />
+    } else {
+      return 'No tracks added to current playlist';
+    }
   }
 
   render(){
@@ -18,11 +35,14 @@ class Playlist extends React.Component {
         <div className="col-md-12">
           <div className="card">
             <div className="card-header">
-              <h3 className="card-title">{this.props.playlistName}</h3>
+              <div className="input-group">
+                <input type="text" className="form-control" placeholder={this.props.playlistName} />
+                <span className="input-group-append">
+                  <button type="button" className="btn btn-success" onClick={this.savePlaylist}>Save to Spotify</button>
+                </span>
+              </div>
             </div>
-            <div className="card-body p-0">
-              <TrackList tracks={this.props.playlistTracks} onSelect={this.props.onSelect} onAdd={this.props.onAdd} />
-            </div>
+            <div className="card-body">{ this.displayTracks() }</div>
           </div>
         </div>
       </div>
@@ -30,16 +50,16 @@ class Playlist extends React.Component {
   }
 }
 
-TrackList.propTypes = {
+Playlist.propTypes = {
   playlistName: PropTypes.string,
   playlistTracks: PropTypes.array,
-  onRemove: PropTypes.func
+  onSelect: PropTypes.func
 };
 
-TrackList.defaultProps = {
-  playlistName: '',
+Playlist.defaultProps = {
+  playlistName: 'Unnamed Playlist',
   playlistTracks: [],
-  onRemove: () => {}
+  onSelect: () => {}
 };
 
 export default Playlist;

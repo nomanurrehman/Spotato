@@ -68,9 +68,6 @@ class Homepage extends React.Component {
           </section>
         </div>
 
-        <aside className="control-sidebar control-sidebar-dark">
-        </aside>
-
         <Footer />
       </div>
     );

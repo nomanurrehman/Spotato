@@ -17,11 +17,19 @@ class PlaylistPage extends React.Component {
      * an empty array in case no data is passed.
      */
     this.state = {
+      playlistName: 'Unnamed Playlist',
       playlistTracks: playlistTracks || [],
       selectedPlaylistTrack: {}
     }
+    this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.selectTrack = this.selectTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
+  }
+
+  updatePlaylistName(name){
+    this.setState({
+      playlistName: name
+    });
   }
 
   selectTrack(track){
@@ -48,14 +56,11 @@ class PlaylistPage extends React.Component {
           </div>
           <section className="content">
             <div className="container-fluid">
-              <Playlist playlistTracks={this.state.playlistTracks} onSelect={this.selectTrack} />
+              <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} onSelect={this.selectTrack} onNameChange={this.updatePlaylistName} />
             </div>
             <Modal track={this.state.selectedPlaylistTrack} action="remove" onAction={this.removeTrack} />
           </section>
         </div>
-
-        <aside className="control-sidebar control-sidebar-dark">
-        </aside>
 
         <Footer />
       </div>

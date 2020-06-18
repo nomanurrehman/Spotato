@@ -15,7 +15,7 @@ class TrackList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          { this.props.tracks.map(track => { return <Track key={track.id} track={track} onSelect={this.props.onSelect} onRemove={this.props.onRemove} /> }) }
+          { this.props.tracks.map(track => { return <Track key={track.id} track={track} onSelect={this.props.onSelect} buttonText={this.props.buttonText} /> }) }
         </tbody>
       </table>
     );
@@ -23,15 +23,15 @@ class TrackList extends React.Component {
 }
 
 TrackList.propTypes = {
+  buttonText: PropTypes.string,
   tracks: PropTypes.array,
-  onSelect: PropTypes.func,
-  onRemove: PropTypes.func
+  onSelect: PropTypes.func
 };
 
 TrackList.defaultProps = {
+  buttonText: '',
   tracks: [],
-  onSelect: () => {},
-  onRemove: () => {}
+  onSelect: () => {}
 };
 
 export default TrackList;
