@@ -2,25 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Modal extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.performAction = this.performAction.bind(this);
-    console.log(props);
   }
 
-  getMessage(){
+  getMessage() {
+    const {
+      track,
+      action,
+    } = this.props;
     const message = {
-      add: `Are you sure you wish to add ${this.props.track.name} by ${this.props.track.artist} to the current playlist?`,
-      remove: `Are you sure you wish to remove ${this.props.track.name} by ${this.props.track.artist} from the current playlist?`,
-    }
-    return message[this.props.action];
+      add: `Are you sure you wish to add ${track.name} by ${track.artist} to the current playlist?`,
+      remove: `Are you sure you wish to remove ${track.name} by ${track.artist} from the current playlist?`,
+    };
+    return message[action];
   }
 
-  performAction(){
-    this.props.onAction(this.props.track);
+  performAction() {
+    const {
+      track,
+      onAction,
+    } = this.props;
+    onAction(track);
   }
 
-  render(){
+  render() {
     return (
       <div className="modal fade show" id="modal" aria-modal="true">
         <div className="modal-dialog">
@@ -46,7 +53,14 @@ class Modal extends React.Component {
 }
 
 Modal.propTypes = {
-  track: PropTypes.object,
+  track: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    artist: PropTypes.string,
+    album: PropTypes.string,
+    uri: PropTypes.string,
+    index: PropTypes.number,
+  }),
   action: PropTypes.string,
   onAction: PropTypes.func,
 };
@@ -54,7 +68,7 @@ Modal.propTypes = {
 Modal.defaultProps = {
   track: {},
   action: '',
-  onAction: () => {}
+  onAction: () => {},
 };
 
 export default Modal;

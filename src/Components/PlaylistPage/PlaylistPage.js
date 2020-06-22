@@ -1,14 +1,15 @@
 import React from 'react';
-import Playlist from './../Playlist/Playlist';
-import TopNavigation from './../TopNavigation/TopNavigation';
-import SideNavigation from './../SideNavigation/SideNavigation';
-import Modal from './../Modal/Modal';
-import Footer from './../Footer/Footer';
+import PropTypes from 'prop-types';
+import Playlist from '../Playlist/Playlist';
+import TopNavigation from '../TopNavigation/TopNavigation';
+import SideNavigation from '../SideNavigation/SideNavigation';
+import Modal from '../Modal/Modal';
+import Footer from '../Footer/Footer';
 
 class PlaylistPage extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    const {playlistTracks} = this.props.location;
+    const { playlistTracks } = this.props.location;
     /*
      * TODO: When landing directly on a page,
      * React Router does not pass in data
@@ -19,41 +20,38 @@ class PlaylistPage extends React.Component {
     this.state = {
       playlistName: 'Unnamed Playlist',
       playlistTracks: playlistTracks || [],
-      selectedPlaylistTrack: {}
-    }
+      selectedPlaylistTrack: {},
+    };
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.selectTrack = this.selectTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
   }
 
-  updatePlaylistName(name){
+  updatePlaylistName(name) {
     this.setState({
-      playlistName: name
+      playlistName: name,
     });
   }
 
-  selectTrack(track){
+  selectTrack(track) {
     this.setState({
-      selectedPlaylistTrack: track
+      selectedPlaylistTrack: track,
     });
   }
 
-  removeTrack(track){
-    this.setState({
-      playlistTracks: this.state.playlistTracks.filter(playlistTrack => playlistTrack !== track)
-    });
+  removeTrack(track) {
+    this.setState((prevState) => { playlistTracks: prevState.playlistTracks.filter(playlistTrack => playlistTrack !== track) });
   }
 
-  render(){
+  render() {
     return (
       <div className="wrapper">
-        <TopNavigation/>
+        <TopNavigation />
 
         <SideNavigation playlistTracks={this.state.playlistTracks} />
 
         <div className="content-wrapper">
-          <div className="content-header">
-          </div>
+          <div className="content-header" />
           <section className="content">
             <div className="container-fluid">
               <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} onSelect={this.selectTrack} onNameChange={this.updatePlaylistName} />
@@ -67,5 +65,13 @@ class PlaylistPage extends React.Component {
     );
   }
 }
+
+PlaylistPage.propTypes = {
+  location: PropTypes.object,
+};
+
+PlaylistPage.defaultProps = {
+  location: {},
+};
 
 export default PlaylistPage;
