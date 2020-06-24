@@ -9,7 +9,7 @@ import Footer from '../Footer/Footer';
 class PlaylistPage extends React.Component {
   constructor(props) {
     super(props);
-    const { playlistTracks } = this.props.location;
+    const { playlistTracks } = props.location;
     /*
      * TODO: When landing directly on a page,
      * React Router does not pass in data
@@ -40,23 +40,28 @@ class PlaylistPage extends React.Component {
   }
 
   removeTrack(track) {
-    this.setState((prevState) => { playlistTracks: prevState.playlistTracks.filter(playlistTrack => playlistTrack !== track) });
+    this.setState((prevState) => ({ playlistTracks: prevState.playlistTracks.filter((playlistTrack) => playlistTrack !== track) }));
   }
 
   render() {
+    const {
+      playlistName,
+      playlistTracks,
+      selectedPlaylistTrack,
+    } = this.state;
     return (
       <div className="wrapper">
         <TopNavigation />
 
-        <SideNavigation playlistTracks={this.state.playlistTracks} />
+        <SideNavigation playlistTracks={playlistTracks} />
 
         <div className="content-wrapper">
           <div className="content-header" />
           <section className="content">
             <div className="container-fluid">
-              <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} onSelect={this.selectTrack} onNameChange={this.updatePlaylistName} />
+              <Playlist playlistName={playlistName} playlistTracks={playlistTracks} onSelect={this.selectTrack} onNameChange={this.updatePlaylistName} />
             </div>
-            <Modal track={this.state.selectedPlaylistTrack} action="remove" onAction={this.removeTrack} />
+            <Modal track={selectedPlaylistTrack} action="remove" onAction={this.removeTrack} />
           </section>
         </div>
 

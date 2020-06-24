@@ -1,35 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TrackList from './../TrackList/TrackList';
+import TrackList from '../TrackList/TrackList';
 
 class SearchResults extends React.Component {
-
   /*
    * If nothing has been searched yet,
    * notify user to search else
    * show search term.
    */
-  displayTerm(){
-    if(this.props.term.length !== 0){
-      return `Search results for "${this.props.term}"`;
-    } else {
-      return "Let's get rolling with the searchin..."
+  displayTerm() {
+    const { term } = this.props;
+    if (term.length !== 0) {
+      return `Search results for "${term}"`;
     }
+    return "Let's get rolling with the searchin...";
   }
 
   /*
    * If there are no tracks to display,
    * notify user else show tracks.
    */
-  displayResults(){
-    if(this.props.searchResults.length > 0){
-      return <TrackList tracks={this.props.searchResults} onSelect={this.props.onSelect} buttonText="Add to Playlist" />;
-    } else {
-      return 'No tracks to display';
+  displayResults() {
+    const { searchResults, onSelect } = this.props;
+    if (searchResults.length > 0) {
+      return <TrackList tracks={searchResults} onSelect={onSelect} buttonText="Add to Playlist" />;
     }
+    return 'No tracks to display';
   }
 
-  render(){
+  render() {
     return (
       <div className="row">
         <div className="col-md-12">
@@ -47,14 +46,21 @@ class SearchResults extends React.Component {
 
 SearchResults.propTypes = {
   term: PropTypes.string,
-  searchResults: PropTypes.array,
-  onSelect: PropTypes.func
+  searchResults: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    artist: PropTypes.string,
+    album: PropTypes.string,
+    uri: PropTypes.string,
+    index: PropTypes.number,
+  })),
+  onSelect: PropTypes.func,
 };
 
 SearchResults.defaultProps = {
   term: '',
   searchResults: [],
-  onSelect: () => {}
+  onSelect: () => {},
 };
 
 export default SearchResults;

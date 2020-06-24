@@ -25,11 +25,13 @@ class Homepage extends React.Component {
   }
 
   async search(term) {
-    const searchedTracks = await Spotify.search(term);
-    const { playlistTracks } = this.state;
-    const searchResults = searchedTracks.filter((searchedTrack) => {
-      return !playlistTracks.some((playlistTrack) => playlistTrack.id === searchedTrack.id);
-    });
+    const searchResults = await Spotify.search(term);
+    // const { playlistTracks } = this.state;
+    // const searchResults = searchedTracks.filter(
+    //   (searchedTrack) => !playlistTracks.some(
+    //     (playlistTrack) => playlistTrack.id === searchedTrack.id
+    //   )
+    // );
     this.setState({
       term,
       searchResults,
@@ -44,15 +46,19 @@ class Homepage extends React.Component {
 
   addTrack(track) {
     const { playlistTracks } = this.state;
-    let { searchResults } = this.state;
     if (!playlistTracks.includes(track)) {
       playlistTracks.push(track);
-      searchResults = searchResults.filter((searchResult) => searchResult.id !== track.id);
+      const searchResults = this.removeTrackFromSearchResults(track);
       this.setState({
         playlistTracks,
         searchResults,
       });
     }
+  }
+
+  removeTrackFromSearchResults(track) {
+    const { searchResults } = this.state;
+    return searchResults.filter((searchResult) => searchResult.id !== track.id);
   }
 
   render() {
