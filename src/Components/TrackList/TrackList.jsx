@@ -5,13 +5,13 @@ import Track from '../Track/Track';
 const TrackList = function trackList(props) {
   const { tracks, onSelect, buttonText } = props;
   return (
-    <table className="table table-bordered table-striped">
+    <table className="table table-dark table-striped table-bordered">
       <thead>
         <tr>
-          <th style={{ width: '10px' }}>#</th>
-          <th>Title</th>
-          <th>Artist</th>
-          <th>Action</th>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Artist</th>
+          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>

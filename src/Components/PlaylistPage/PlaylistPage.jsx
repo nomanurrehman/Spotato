@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Playlist from '../Playlist/Playlist';
-import TopNavigation from '../TopNavigation/TopNavigation';
-import SideNavigation from '../SideNavigation/SideNavigation';
-import Modal from '../Modal/Modal';
+import Navigation from '../Navigation/Navigation';
+import RemoveModal from '../RemoveModal/RemoveModal';
 import Footer from '../Footer/Footer';
+import PlaylistNameForm from '../PlaylistNameForm/PlaylistNameForm';
 
 class PlaylistPage extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class PlaylistPage extends React.Component {
     this.state = {
       playlistName: 'Unnamed Playlist',
       playlistTracks: playlistTracks || [],
-      selectedPlaylistTrack: {},
+      selectedTrack: {},
     };
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.selectTrack = this.selectTrack.bind(this);
@@ -35,7 +35,7 @@ class PlaylistPage extends React.Component {
 
   selectTrack(track) {
     this.setState({
-      selectedPlaylistTrack: track,
+      selectedTrack: track,
     });
   }
 
@@ -47,25 +47,14 @@ class PlaylistPage extends React.Component {
     const {
       playlistName,
       playlistTracks,
-      selectedPlaylistTrack,
+      selectedTrack,
     } = this.state;
     return (
-      <div className="wrapper">
-        <TopNavigation />
-
-        <SideNavigation playlistTracks={playlistTracks} />
-
-        <div className="content-wrapper">
-          <div className="content-header" />
-          <section className="content">
-            <div className="container-fluid">
-              <Playlist playlistName={playlistName} playlistTracks={playlistTracks} onSelect={this.selectTrack} onNameChange={this.updatePlaylistName} />
-            </div>
-            <Modal track={selectedPlaylistTrack} action="remove" onAction={this.removeTrack} />
-          </section>
-        </div>
-
-        <Footer />
+      <div className="container-fluid">
+        <RemoveModal track={selectedTrack} onAction={this.removeTrack} />
+        <Navigation playlistTracks={playlistTracks} onSearch={this.search} />
+        <PlaylistNameForm />
+        <Playlist playlistName={playlistName} playlistTracks={playlistTracks} onSelect={this.selectTrack} onNameChange={this.updatePlaylistName} />
       </div>
     );
   }

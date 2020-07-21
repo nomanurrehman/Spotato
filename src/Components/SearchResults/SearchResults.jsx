@@ -1,21 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import SearchCaption from '../SearchCaption/SearchCaption';
 import TrackList from '../TrackList/TrackList';
 
 class SearchResults extends React.Component {
-  /*
-   * If nothing has been searched yet,
-   * notify user to search else
-   * show search term.
-   */
-  displayTerm() {
-    const { term } = this.props;
-    if (term.length !== 0) {
-      return `Search results for "${term}"`;
-    }
-    return "Let's get rolling with the searchin...";
-  }
-
   /*
    * If there are no tracks to display,
    * notify user else show tracks.
@@ -25,19 +13,16 @@ class SearchResults extends React.Component {
     if (searchResults.length > 0) {
       return <TrackList tracks={searchResults} onSelect={onSelect} buttonText="Add to Playlist" />;
     }
-    return 'No tracks to display';
+    return null;
   }
 
   render() {
+    const { term } = this.props;
     return (
       <div className="row">
-        <div className="col-md-12">
-          <div className="card">
-            <div className="card-header">
-              <h3 className="card-title">{ this.displayTerm() }</h3>
-            </div>
-            <div className="card-body">{ this.displayResults() }</div>
-          </div>
+        <div className="col-lg-12">
+          <SearchCaption term={term} />
+          { this.displayResults() }
         </div>
       </div>
     );

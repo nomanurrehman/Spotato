@@ -30,25 +30,15 @@ class Playlist extends React.Component {
     if (playlistTracks.length !== 0) {
       return <TrackList tracks={playlistTracks} onSelect={onSelect} buttonText="Remove from Playlist" />;
     }
-    return 'No tracks added to current playlist';
+    return null;
   }
 
   render() {
     const { playlistName } = this.props;
     return (
       <div className="row">
-        <div className="col-md-12">
-          <div className="card">
-            <div className="card-header">
-              <div className="input-group">
-                <input type="text" className="form-control" placeholder={playlistName} />
-                <span className="input-group-append">
-                  <button type="button" className="btn btn-success" onClick={this.savePlaylist}>Save to Spotify</button>
-                </span>
-              </div>
-            </div>
-            <div className="card-body">{ this.displayTracks() }</div>
-          </div>
+        <div className="col-lg-12">
+          { this.displayTracks() }
         </div>
       </div>
     );

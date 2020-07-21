@@ -19,13 +19,11 @@ class Track extends React.Component {
     } = this.props;
     return (
       <tr>
-        <td>{track.index}</td>
-        <td>{track.name}</td>
-        <td>{track.artist}</td>
+        <td className="align-middle">{track.index}</td>
+        <td className="align-middle">{track.name}</td>
+        <td className="align-middle">{track.artist}</td>
         <td>
-          <div className="btn-group">
-            <button type="button" className="btn btn-block btn-success btn-sm" data-toggle="modal" data-target="#modal" onClick={this.select}>{buttonText}</button>
-          </div>
+          <button type="button" className="btn btn-sm btn-success" data-toggle="modal" data-target="#modal" onClick={this.select}>{buttonText}</button>
         </td>
       </tr>
     );

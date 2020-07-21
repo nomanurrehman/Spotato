@@ -29,15 +29,13 @@ class SearchForm extends React.Component {
   render() {
     const { term } = this.state;
     return (
-      <div className="input-group input-group-sm">
-        <input className="form-control form-control-navbar" type="search" placeholder="Search tracks" aria-label="Search" value={term} onChange={this.handleTermChange} />
-        <div className="input-group-append">
-          <button className="btn btn-navbar" type="button" onClick={this.search}>
-            <i className="fas fa-search" />
-          </button>
-        </div>
-      </div>
+      <form className="form-inline my-2 my-lg-0">
+        <input className="form-control mr-sm-2" type="search" placeholder="Keywords" value={term} onChange={this.handleTermChange} />
+        <button className="btn btn-success my-2 my-sm-0" type="button" onClick={this.search}>Search Spotify</button>
+      </form>
     );
+
+
   }
 }
 

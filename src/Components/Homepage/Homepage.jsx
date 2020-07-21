@@ -1,9 +1,8 @@
 import React from 'react';
 import SearchResults from '../SearchResults/SearchResults';
-import TopNavigation from '../TopNavigation/TopNavigation';
-import SideNavigation from '../SideNavigation/SideNavigation';
-import Modal from '../Modal/Modal';
-import Footer from '../Footer/Footer';
+import Navigation from '../Navigation/Navigation';
+import AddModal from '../AddModal/AddModal';
+// import Footer from '../Footer/Footer';
 import Spotify from '../../util/Spotify';
 
 class Homepage extends React.Component {
@@ -66,22 +65,10 @@ class Homepage extends React.Component {
       term, playlistTracks, searchResults, selectedTrack,
     } = this.state;
     return (
-      <div className="wrapper">
-        <TopNavigation searchTerm={term} onSearch={this.search} />
-
-        <SideNavigation playlistTracks={playlistTracks} />
-
-        <div className="content-wrapper">
-          <div className="content-header" />
-          <section className="content">
-            <div className="container-fluid">
-              <SearchResults term={term} searchResults={searchResults} onSelect={this.selectTrack} />
-            </div>
-            <Modal track={selectedTrack} action="add" onAction={this.addTrack} />
-          </section>
-        </div>
-
-        <Footer />
+      <div className="container-fluid">
+        <AddModal track={selectedTrack} onAction={this.addTrack} />
+        <Navigation playlistTracks={playlistTracks} onSearch={this.search} />
+        <SearchResults term={term} searchResults={searchResults} onSelect={this.selectTrack} />
       </div>
     );
   }
