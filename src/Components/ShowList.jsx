@@ -1,7 +1,8 @@
 import React from 'react';
 import Show from './Show';
 
-const ShowList = function showList() {
+const ShowList = function showList(props) {
+  const {shows} = props;
   return (
     <div className="col-lg-12 mb-3">
       <h3 className="text-success text-center mb-3">Shows</h3>
@@ -15,11 +16,7 @@ const ShowList = function showList() {
           </tr>
         </thead>
         <tbody>
-          <Show />
-          <Show />
-          <Show />
-          <Show />
-          <Show />
+          { shows.items.map((show) => <Show key={show.id} show={show} />) }
         </tbody>
       </table>
     </div>
