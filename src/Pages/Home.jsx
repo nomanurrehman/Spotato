@@ -2,14 +2,16 @@ import React from 'react';
 import Navigation from '../Components/Navigation';
 import SearchForm from '../Components/SearchForm';
 import SearchCaption from '../Components/SearchCaption';
-import Navigation from '../Components/AlbumList';
-import Navigation from '../Components/ArtistList';
-import Navigation from '../Components/TrackList';
-import Navigation from '../Components/PlaylistList';
-import Navigation from '../Components/ShowList';
-import Navigation from '../Components/EpisodeList';
-import Navigation from '../Components/Footer';
+import AlbumList from '../Components/AlbumList';
+import ArtistList from '../Components/ArtistList';
+import TrackList from '../Components/TrackList';
+import PlaylistList from '../Components/PlaylistList';
+import ShowList from '../Components/ShowList';
+import EpisodeList from '../Components/EpisodeList';
 import Footer from '../Components/Footer';
+import searchResults from './searchResults';
+
+const term = "batman";
 
 const Home = function home() {
   return (
@@ -18,13 +20,13 @@ const Home = function home() {
       <div className="container">
         <SearchForm />
         <div className="row">
-          <SearchCaption />
-          <AlbumList />
-          <ArtistList />
-          <TrackList />
-          <PlaylistList />
-          <ShowList />
-          <EpisodeList />
+          <SearchCaption term={term} />
+          <AlbumList albums={searchResults.albums} />
+          <ArtistList artists={searchResults.artists} />
+          <TrackList tracks={searchResults.tracks} />
+          <PlaylistList playlists={searchResults.playlists} />
+          <ShowList shows={searchResults.shows} />
+          <EpisodeList episodes={searchResults.episodes} />
         </div>
       </div>
       <Footer />
