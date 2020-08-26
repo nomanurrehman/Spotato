@@ -1,17 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const SearchCaption = function searchCaption() {
+const SearchCaption = function searchCaption(props) {
+  const {term} = props;
   return (
-    <footer className="main-footer">
-      <div className="float-right">
-        Built with love using
-        <a href="http://adminlte.io">Admin LTE</a>
-      </div>
-    </footer>
+    <div className="col-lg-12 mb-3">
+      <h1 className="text-success text-center">Search results for "{term}"</h1>
+    </div>
   );
 };
 
-SearchCaption.propTypes = {};
-SearchCaption.defaultProps = {};
+SearchCaption.propTypes = {
+  term: PropTypes.string,
+};
+
+SearchCaption.defaultProps = {
+  term: '',
+}
 
 export default SearchCaption;
