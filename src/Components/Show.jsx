@@ -1,14 +1,15 @@
 import React from 'react';
 
-const Show = function show() {
+const Show = function show(props) {
+  const {show} = props;
   return (
     <tr>
       <td className="align-middle">1</td>
       <td className="align-middle">
-        <a className="btn btn-sm btn-success">Kiss from a rose</button>
+        <a className="btn btn-sm btn-success">{show.name}</a>
       </td>
-      <td className="align-middle">Seal</td>
-      <td className="align-middle">98</td>
+      <td className="align-middle">{show.publisher}</td>
+      <td className="align-middle">{show.total_episodes}</td>
     </tr>
   );
 };
