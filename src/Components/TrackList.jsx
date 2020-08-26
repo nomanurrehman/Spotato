@@ -1,7 +1,8 @@
 import React from 'react';
 import Track from './Track';
 
-const TrackList = function trackList() {
+const TrackList = function trackList(props) {
+  const {tracks} = props;
   return (
     <div className="col-lg-12 mb-3">
       <h3 className="text-success text-center mb-3">Tracks</h3>
@@ -16,11 +17,7 @@ const TrackList = function trackList() {
           </tr>
         </thead>
         <tbody>
-          <Track />
-          <Track />
-          <Track />
-          <Track />
-          <Track />
+          { tracks.items.map((track) => <Track key={track.id} track={track} />) }
         </tbody>
       </table>
     </div>
