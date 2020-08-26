@@ -1,7 +1,8 @@
 import React from 'react';
 import Episode from './Episode';
 
-const EpisodeList = function episodeList() {
+const EpisodeList = function episodeList(props) {
+  const {episodes} = props;
   return (
     <div className="col-lg-12 mb-3">
       <h3 className="text-success text-center mb-3">Episodes</h3>
@@ -16,7 +17,7 @@ const EpisodeList = function episodeList() {
           </tr>
         </thead>
         <tbody>
-          <Episode />
+          { episodes.items.map((episode) => <Episode key={episode.id} episode={episode} />) }
         </tbody>
       </table>
     </div>
