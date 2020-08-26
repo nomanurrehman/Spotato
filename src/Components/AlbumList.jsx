@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Album from './Album';
 
-const AlbumList = function albumList() {
+const AlbumList = function albumList(props) {
+  const {albums} = props;
   return (
     <div className="col-lg-12 mb-3">
       <h3 className="text-success text-center mb-3">Albums</h3>
@@ -15,18 +17,28 @@ const AlbumList = function albumList() {
           </tr>
         </thead>
         <tbody>
-          <Album />
-          <Album />
-          <Album />
-          <Album />
-          <Album />
+          { albums.items.map((album) => <Album key={album.id} album={album} />) }
         </tbody>
       </table>
     </div>
   );
 };
 
-AlbumList.propTypes = {};
-AlbumList.defaultProps = {};
+AlbumList.propTypes = {
+  albums: PropTypes.shape({
+    items: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      artist: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string
+      })),
+      total_tracks: PropTypes.number,
+    })),
+  }),
+};
+
+AlbumList.defaultProps = {
+  albums: {}
+};
 
 export default AlbumList;
