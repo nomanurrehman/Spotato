@@ -2,10 +2,9 @@ import React from 'react';
 
 const Footer = function footer() {
   return (
-    <footer className="main-footer">
-      <div className="float-right">
-        Built with love using
-        <a href="http://adminlte.io">Admin LTE</a>
+    <footer className="bg-dark fixed-bottom">
+      <div className="container">
+        <p className="text-center text-success pt-3">All rights reserved.</p>
       </div>
     </footer>
   );
