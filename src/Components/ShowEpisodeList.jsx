@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Episode from './Episode';
+import ShowEpisode from './ShowEpisode';
 
-const EpisodeList = function episodeList(props) {
+const ShowEpisodeList = function showEpisodeList(props) {
   const {episodes} = props;
 
   if(episodes.items.length) {
@@ -14,6 +14,7 @@ const EpisodeList = function episodeList(props) {
             <tr>
               <th scope="col">#</th>
               <th scope="col">Name</th>
+              <th scope="col">Show</th>
               <th scope="col">Duration</th>
               <th scope="col">Action</th>
             </tr>
@@ -28,12 +29,12 @@ const EpisodeList = function episodeList(props) {
   return null;
 };
 
-EpisodeList.propTypes = {};
+ShowEpisodeList.propTypes = {};
 
-EpisodeList.defaultProps = {
+ShowEpisodeList.defaultProps = {
   episodes: {
     items: []
   }
 };
 
-export default EpisodeList;
+export default ShowEpisodeList;

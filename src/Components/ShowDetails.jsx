@@ -1,39 +1,29 @@
 import React from 'react';
 
-const ShowDetails = function showDetails() {
+const ShowDetails = function showDetails(props) {
+  const { show } = props;
   return (
     <React.Fragment>
       <div className="col-lg-12">
-        <h1 className="text-success text-center mb-3">Album Name</h1>
+        <h1 className="text-success text-center mb-3">{show.name}</h1>
       </div>
       <div className="col-lg-4 mb-3">
-        <img className="w-100" src="https://i.scdn.co/image/ab67616d0000b273f4c962d358de7ed4548d00b3" />
+        <img className="w-100" src={show.images[0].url} />
       </div>
       <div className="col-lg-8">
         <table className="table table-dark table-striped table-bordered">
           <tbody>
             <tr>
-              <td className="align-middle">Artist(s)</td>
-              <td className="align-middle">
-                <a className="btn btn-sm btn-success" href="artist.html">Artist 1</a>
-                <a className="btn btn-sm btn-success" href="artist.html">Artist 2</a>
-              </td>
+              <td className="align-middle">Description</td>
+              <td className="align-middle">{show.description}</td>
             </tr>
             <tr>
-              <td className="align-middle">Label</td>
-              <td className="align-middle">Watertower Music</td>
+              <td className="align-middle">Publisher</td>
+              <td className="align-middle">{show.publisher}</td>
             </tr>
             <tr>
-              <td className="align-middle">Release Date</td>
-              <td className="align-middle">2020-09-02</td>
-            </tr>
-            <tr>
-              <td className="align-middle">Total Tracks</td>
-              <td className="align-middle">12</td>
-            </tr>
-            <tr>
-              <td className="align-middle">Popularity</td>
-              <td className="align-middle">94</td>
+              <td className="align-middle">Total Episode(s)</td>
+              <td className="align-middle">{show.total_episodes}</td>
             </tr>
           </tbody>
         </table>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Playlist = function playlist(props) {
   const {playlist} = props;
@@ -6,7 +7,7 @@ const Playlist = function playlist(props) {
     <tr>
       <td className="align-middle">1</td>
       <td className="align-middle">
-        <a className="btn btn-sm btn-success">{playlist.name}</a>
+        <Link className="btn btn-sm btn-success" to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
       </td>
       <td className="align-middle">{playlist.owner.display_name}</td>
       <td className="align-middle">{playlist.owner.id}</td>

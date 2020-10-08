@@ -1,13 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Episode = function episode(props) {
+const ShowEpisode = function showEpisode(props) {
   const {episode} = props;
   return (
     <tr>
       <td className="align-middle fit">1</td>
       <td className="align-middle">
         <Link className="btn btn-sm btn-success" to={`/episodes/${episode.id}`}>{episode.name}</Link>
+      </td>
+      <td className="align-middle">
+        <a className="btn btn-sm btn-success" href="http://www.google.com">Show Name Not Available</a>
       </td>
       <td className="align-middle">{episode.duration_ms}</td>
       <td className="align-middle">
@@ -17,7 +20,7 @@ const Episode = function episode(props) {
   );
 };
 
-Episode.propTypes = {};
-Episode.defaultProps = {};
+ShowEpisode.propTypes = {};
+ShowEpisode.defaultProps = {};
 
-export default Episode;
+export default ShowEpisode;

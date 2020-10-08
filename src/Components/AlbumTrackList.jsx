@@ -1,25 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Episode from './Episode';
+import AlbumTrack from './AlbumTrack';
 
-const EpisodeList = function episodeList(props) {
-  const {episodes} = props;
+const AlbumTrackList = function albumTrackList(props) {
+  const { album } = props;
 
-  if(episodes.items.length) {
+  if(album.tracks.items.length) {
     return (
       <div className="col-lg-12 mb-3">
-        <h3 className="text-success text-center mb-3">Episodes</h3>
+        <h3 className="text-success text-center mb-3">Tracks</h3>
         <table className="table table-dark table-striped table-bordered">
           <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Name</th>
-              <th scope="col">Duration</th>
+              <th scope="col">Artist</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            { episodes.items.map((episode) => <Episode key={episode.id} episode={episode} />) }
+            { album.tracks.items.map((track) => <AlbumTrack key={track.id} album={album} track={track} />) }
           </tbody>
         </table>
       </div>
@@ -28,12 +28,12 @@ const EpisodeList = function episodeList(props) {
   return null;
 };
 
-EpisodeList.propTypes = {};
+AlbumTrackList.propTypes = {};
 
-EpisodeList.defaultProps = {
-  episodes: {
+AlbumTrackList.defaultProps = {
+  tracks: {
     items: []
   }
 };
 
-export default EpisodeList;
+export default AlbumTrackList;

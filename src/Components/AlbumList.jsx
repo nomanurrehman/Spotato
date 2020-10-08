@@ -4,24 +4,29 @@ import Album from './Album';
 
 const AlbumList = function albumList(props) {
   const {albums} = props;
-  return (
-    <div className="col-lg-12 mb-3">
-      <h3 className="text-success text-center mb-3">Albums</h3>
-      <table className="table table-dark table-striped table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Artist</th>
-            <th scope="col">Total Tracks</th>
-          </tr>
-        </thead>
-        <tbody>
-          { albums.items.map((album) => <Album key={album.id} album={album} />) }
-        </tbody>
-      </table>
-    </div>
-  );
+
+  if(albums.items.length) {
+    return (
+      <div className="col-lg-12 mb-3">
+        <h3 className="text-success text-center mb-3">Albums</h3>
+        <table className="table table-dark table-striped table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Artist</th>
+              <th scope="col">Total Tracks</th>
+            </tr>
+          </thead>
+          <tbody>
+            { albums.items.map((album) => <Album key={album.id} album={album} />) }
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+  
+  return null;
 };
 
 AlbumList.propTypes = {
@@ -38,7 +43,9 @@ AlbumList.propTypes = {
 };
 
 AlbumList.defaultProps = {
-  albums: {}
+  albums: {
+    items: []
+  }
 };
 
 export default AlbumList;

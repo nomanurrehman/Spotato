@@ -19,16 +19,62 @@ const Spotify = {
       }
     }
   },
-  search: async function(term){
+
+  search: async function(term, type){
     const accessToken = this.getAccessToken();
-    const searchUrl = `https://api.spotify.com/v1/search?type=track&q=${term}`;
+    const searchUrl = `https://api.spotify.com/v1/search?type=${type}&q=${term}`;
     const headers = {headers: {Authorization: `Bearer ${accessToken}`}};
-    const response = await fetch(searchUrl, headers);
-    const jsonResponse = await response.json();
-    return jsonResponse.tracks.items.map((item, index) => {
-      return {id: item.id, name: item.name, artist: item.artists[0].name, album: item.album.name, uri: item.uri, index: ++index};
-    });
+    return this.getResponse(searchUrl, headers);
   },
+
+  getAlbum: async function(id){
+    const accessToken = this.getAccessToken();
+    const albumUrl = `https://api.spotify.com/v1/albums/${id}`;
+    const headers = {headers: {Authorization: `Bearer ${accessToken}`}};
+    return this.getResponse(albumUrl, headers); 
+  },
+
+  getTrack: async function(id){
+    const accessToken = this.getAccessToken();
+    const trackUrl = `https://api.spotify.com/v1/tracks/${id}`;
+    const headers = {headers: {Authorization: `Bearer ${accessToken}`}};
+    return this.getResponse(trackUrl, headers); 
+  },
+
+  getArtist: async function(id){
+    const accessToken = this.getAccessToken();
+    const artistUrl = `https://api.spotify.com/v1/artists/${id}`;
+    const headers = {headers: {Authorization: `Bearer ${accessToken}`}};
+    return this.getResponse(artistUrl, headers); 
+  },
+
+  getPlaylist: async function(id){
+    const accessToken = this.getAccessToken();
+    const playlistUrl = `https://api.spotify.com/v1/playlists/${id}`;
+    const headers = {headers: {Authorization: `Bearer ${accessToken}`}};
+    return this.getResponse(playlistUrl, headers); 
+  },
+
+  getShow: async function(id){
+    const accessToken = this.getAccessToken();
+    const showUrl = `https://api.spotify.com/v1/shows/${id}`;
+    const headers = {headers: {Authorization: `Bearer ${accessToken}`}};
+    return this.getResponse(showUrl, headers); 
+  },
+
+  getEpisode: async function(id){
+    const accessToken = this.getAccessToken();
+    const episodeUrl = `https://api.spotify.com/v1/episodes/${id}`;
+    const headers = {headers: {Authorization: `Bearer ${accessToken}`}};
+    return this.getResponse(episodeUrl, headers); 
+  },
+
+  getResponse: async function(url, headers){
+    const response = await fetch(url, headers);
+    const jsonResponse = await response.json();
+    return jsonResponse;
+  },
+  
   savePlaylist: async function(name, tracks){
     if(name && tracks){
       let response, jsonResponse;

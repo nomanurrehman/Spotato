@@ -9,29 +9,56 @@ import PlaylistList from '../Components/PlaylistList';
 import ShowList from '../Components/ShowList';
 import EpisodeList from '../Components/EpisodeList';
 import Footer from '../Components/Footer';
-import searchResults from './searchResults';
+import Spotify from '../util/Spotify';
 
-const term = "batman";
+class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      term: '',
+      searchResults: {},
+      playlist: []
+    }
+    this.search = this.search.bind(this);
+    this.addToPlaylist = this.addToPlaylist.bind(this);
+  }
 
-const Home = function home() {
-  return (
-    <React.Fragment>
-      <Navigation />
-      <div className="container">
-        <SearchForm />
-        <div className="row">
-          <SearchCaption term={term} />
-          <AlbumList albums={searchResults.albums} />
-          <ArtistList artists={searchResults.artists} />
-          <TrackList tracks={searchResults.tracks} />
-          <PlaylistList playlists={searchResults.playlists} />
-          <ShowList shows={searchResults.shows} />
-          <EpisodeList episodes={searchResults.episodes} />
+  async search(params){
+    const {term, types} = params;
+    const searchResults = await Spotify.search(term, types.join(","));
+    this.setState((state, props) => {
+      return {
+        term: term,
+        searchResults: searchResults
+      };
+    });
+  }
+
+  addToPlaylist(item){
+    console.log(item);
+  }
+
+  render() {
+    const {term, searchResults} = this.state;
+    return (
+      <React.Fragment>
+        <Navigation />
+        <div className="container">
+          <SearchForm onSearch={this.search} />
+          <div className="row">
+            <SearchCaption term={term} />
+            <ArtistList artists={searchResults.artists} onAdd={this.addToPlaylist} />
+            <AlbumList albums={searchResults.albums} onAdd={this.addToPlaylist} />
+            <TrackList tracks={searchResults.tracks} onAdd={this.addToPlaylist} />
+            <PlaylistList playlists={searchResults.playlists} onAdd={this.addToPlaylist} />
+            <ShowList shows={searchResults.shows} onAdd={this.addToPlaylist} />
+            <EpisodeList episodes={searchResults.episodes} onAdd={this.addToPlaylist} />
+          </div>
         </div>
-      </div>
-      <Footer />
-    </React.Fragment>
-  );
+        <Footer />
+      </React.Fragment>
+    );
+  }
 };
 
 Home.propTypes = {};

@@ -1,10 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import AudioPreview from './AudioPreview';
 
-const EpisodeDetails = function episodeDetails() {
+const EpisodeDetails = function episodeDetails(props) {
+  const { episode } = props;
+  console.log(episode);
   return (
     <React.Fragment>
       <div className="col-lg-12">
-        <h1 className="text-success text-center mb-3">Episode Name</h1>
+        <h1 className="text-success text-center mb-3">{episode.name}</h1>
       </div>
       <div className="col-lg-4">
         <img className="w-100" src="https://i.scdn.co/image/e40c78da2cb88471a6b18b6cf5e3d3f3c48b428a" />
@@ -14,35 +18,34 @@ const EpisodeDetails = function episodeDetails() {
           <tbody>
             <tr>
               <td className="align-middle">Description</td>
-              <td>Wir blicken auf die Highlights der virtuellen San Diego Comic Con zurück und fassen die Erkenntnisse aus der Justice Con in Bezug auf den Snyder Cut zusammen. Als Gast begrüßen wir diesmal Andy. Wir sind auch bei iTunes und NEU! bei Spotify zu finden und freuen uns über jeden neuen Abonnenten, sowie über euer Feedback. BatCast-Theme von Benjamin Müller Disclaimer: BatCast ist ein Podcast-Projekt von Fans für Fans. Batmannews.de und der BatCast stehen nicht in Verbindung mit Warner Bros. oder DC Comics.</td>
+              <td>{episode.description}</td>
             </tr>
             <tr>
               <td className="align-middle">Duration</td>
-              <td className="align-middle">03:03:10</td>
+              <td className="align-middle">{episode.duration_ms}</td>
             </tr>
             <tr>
               <td className="align-middle">Release Date</td>
-              <td className="align-middle">2020-09-09</td>
+              <td className="align-middle">{episode.release_date}</td>
             </tr>
             <tr>
               <td className="align-middle">Language(s)</td>
-              <td className="align-middle">de-DE</td>
+              <td className="align-middle">{episode.language}</td>
             </tr>
             <tr>
               <td className="align-middle">Show</td>
-              <td className="align-middle"><a href className="btn btn-sm btn-success">Show Name</a></td>
+              <td className="align-middle">
+                <Link className="btn btn-sm btn-success" to={`/shows/${episode.show.id}`}>{episode.show.name}</Link>
+              </td>
             </tr>
             <tr>
               <td className="align-middle">Publisher</td>
-              <td className="align-middle">Batman News</td>
+              <td className="align-middle">{episode.show.publisher}</td>
             </tr>
             <tr>
               <td className="align-middle">Preview</td>
               <td className="align-middle">
-                <audio controls>
-                  <source src="https://p.scdn.co/mp3-preview/40a4c11ce241a982819a1f69eb868ae41e50dae0?cid=774b29d4f13844c495f206cafdad9c86" type="audio/mpeg" />
-                  Your browser does not support the audio element.
-                </audio>
+                <AudioPreview url={episode.audio_preview_url} />
               </td>
             </tr>
             <tr>

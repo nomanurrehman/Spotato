@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const Album = function album(props) {
@@ -15,10 +16,10 @@ const Album = function album(props) {
     <tr>
       <td className="align-middle fit">1</td>
       <td className="align-middle fit">
-        <a className="btn btn-sm btn-success" href="track.html">{shortenName(album.name)}</a>
+        <Link className="btn btn-sm btn-success" to={`/albums/${album.id}`}>{shortenName(album.name)}</Link>
       </td>
       <td className="align-middle">
-        { album.artists.map((artist) => <a key={artist.id} className="btn btn-sm btn-success mr-2" href="track.html">{artist.name}</a>) }
+        { album.artists.map((artist) => <Link className="btn btn-sm btn-success mr-2" to={`/artists/${artist.id}`}>{artist.name}</Link>) }
       </td>
       <td>{album.total_tracks}</td>
     </tr>
@@ -27,6 +28,7 @@ const Album = function album(props) {
 
 Album.propTypes = {
   album: PropTypes.shape({
+    id: PropTypes.string,
     name: PropTypes.string,
     artist: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string

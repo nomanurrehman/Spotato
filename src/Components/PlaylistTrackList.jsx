@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Track from './Track';
 
-const TrackList = function trackList(props) {
-  const {tracks, onAdd} = props;
+const PlaylistTrackList = function playlistTrackList(props) {
+  const {tracks} = props;
 
   if(tracks.items.length) {
     return (
@@ -20,7 +20,7 @@ const TrackList = function trackList(props) {
             </tr>
           </thead>
           <tbody>
-            { tracks.items.map((track) => <Track key={track.id} track={track} onAdd={onAdd} />) }
+            { tracks.items.map((track) => <Track key={track.track.id} track={track.track} />) }
           </tbody>
         </table>
       </div>
@@ -29,12 +29,12 @@ const TrackList = function trackList(props) {
   return null;
 };
 
-TrackList.propTypes = {};
+PlaylistTrackList.propTypes = {};
 
-TrackList.defaultProps = {
+PlaylistTrackList.defaultProps = {
   tracks: {
     items: []
   }
 };
 
-export default TrackList;
+export default PlaylistTrackList;

@@ -1,13 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import AudioPreview from './AudioPreview';
 
-const TrackDetails = function trackDetails() {
+const TrackDetails = function trackDetails(props) {
+  const {name, album, artists, duration_ms, preview_url} = props.track;
   return (
     <React.Fragment>
       <div className="col-lg-12">
-        <h1 className="text-success text-center mb-3">Track Name</h1>
+        <h1 className="text-success text-center mb-3">{name}</h1>
       </div>
       <div className="col-lg-4 mb-3">
-        <img className="w-100" src="https://i.scdn.co/image/ab67616d0000b2730fd58561f282ef69f884071f" />
+        <img className="w-100" src={album.images[0].url} />
       </div>
       <div className="col-lg-8">
         <table className="table table-dark table-striped table-bordered">
@@ -15,27 +18,23 @@ const TrackDetails = function trackDetails() {
             <tr>
               <td className="align-middle">Artist(s)</td>
               <td className="align-middle">
-                <a className="btn btn-sm btn-success">Artist 1</a>
-                <a className="btn btn-sm btn-success">Artist 2</a>
+                { artists.map((artist) => <Link key={artist.id} className="btn btn-sm btn-success mr-2" to={`/artists/${artist.id}`}>{artist.name}</Link>) }
               </td>
             </tr>
             <tr>
               <td className="align-middle">Album</td>
               <td className="align-middle">
-                <a className="btn btn-sm btn-success">Cool Album Name</a>
+                <Link className="btn btn-sm btn-success" to={`/albums/${album.id}`}>{album.name}</Link>
               </td>
             </tr>
             <tr>
               <td className="align-middle">Duration</td>
-              <td className="align-middle">03:03:10</td>
+              <td className="align-middle">{duration_ms}</td>
             </tr>
             <tr>
               <td className="align-middle">Preview</td>
               <td className="align-middle">
-                <audio controls>
-                  <source src="https://p.scdn.co/mp3-preview/40a4c11ce241a982819a1f69eb868ae41e50dae0?cid=774b29d4f13844c495f206cafdad9c86" type="audio/mpeg" />
-                  Your browser does not support the audio element.
-                </audio>
+                <AudioPreview url={preview_url} />
               </td>
             </tr>
             <tr>
@@ -51,7 +50,12 @@ const TrackDetails = function trackDetails() {
   );
 };
 
-TrackDetails.propTypes = {};
-TrackDetails.defaultProps = {};
+TrackDetails.propTypes = {
+  track: {}
+};
+
+TrackDetails.defaultProps = {
+  track: {}
+};
 
 export default TrackDetails;
